@@ -62,12 +62,12 @@ const Section = () => {
             journey and connect with like-minded individuals.
           </p>
           <div className="mt-10">
-            <Link className={`${sectionStyles.btnF}`} to={"/main/contact"}>
+            <Link className={`${sectionStyles.btnF}`} to={"/contact"}>
               Contact Us
             </Link>
           </div>
         </div>
-        <div className="col-lg-5 pb-5 ">
+        <div className="pb-5 ">
           <div className={`${sectionStyles.bgaa} mt-10 ml-5 rounded-md`}>
             <img
               className={`rounded-md absolute ml-10 object-cover h-100 w-[90%] ${sectionStyles.img}`}

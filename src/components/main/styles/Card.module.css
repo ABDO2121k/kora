@@ -53,7 +53,7 @@
 
 .card:hover:before,
 .card:nth-child(2):before {
-  transform: scale(550);
+  transform: scale(600);
   opacity: 1;
 }
 

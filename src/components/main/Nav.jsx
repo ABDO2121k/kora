@@ -7,14 +7,14 @@ import "./styles/Nav.css";
 
 const Nav = () => {
   let Links = [
-    { name: "HOME", link: "/one" },
-    { name: "SERVICE", link: "/two" },
-    { name: "ABOUT", link: "/three" },
+    { name: "Home", link: "/" },
+    { name: "News", link: "/news" },
+    { name: "Contact", link: "/contact" },
   ];
   let [open, setOpen] = useState(false);
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0 z-50">
+    <div className="shadow-md w-full fixed top-0 left-0 z-50 h-[4rem]">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
         {/* logo section */}
         <div className="font-bold text-2xl cursor-pointer flex items-center gap-1">
