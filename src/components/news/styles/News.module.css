@@ -1,0 +1,40 @@
+.sectionT {
+	position: relative;
+	padding-bottom: 16px;
+	margin-bottom: 30px;
+}
+
+.sectionT:before {
+	height: 2px;
+}
+
+.sectionT:after {
+	height: 2px;
+}
+
+.sectionT h5 {
+	font-size: 20px;
+	color: #151618;
+	font-weight: 500;
+}
+
+.sectionT:before {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 70px;
+	background: #dd1515;
+	content: "";
+	z-index: 1;
+}
+
+.sectionT:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 100%;
+	background: #f2f2f2;
+	content: "";
+}

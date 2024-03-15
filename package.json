@@ -16,6 +16,7 @@
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@mui/icons-material": "^5.15.12",
+    "@mui/joy": "^5.0.0-beta.31",
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
     "gsap": "^3.12.5",

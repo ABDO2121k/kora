@@ -1,0 +1,73 @@
+.singleI {
+	overflow: hidden;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 30px;
+}
+
+.singleI:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.biPic {
+	margin-right: 30px;
+}
+
+.img {
+	border-radius: 2px;
+	width: 100%;
+}
+
+.singleI .biText {
+	overflow: hidden;
+	padding-top: 10px;
+}
+
+.singleI .biText h4 {
+	margin-bottom: 12px;
+}
+
+.singleI .biText h4 a {
+	color: #151618;
+	line-height: 32px;
+	font-weight: 500;
+}
+
+.singleI .biText ul {
+	margin-bottom: 20px;
+}
+
+.singleI .biText ul li {
+	list-style: none;
+	display: inline-block;
+	font-size: 13px;
+	color: #ababab;
+	margin-right: 20px;
+	position: relative;
+}
+
+.singleI .biText ul li i {
+	color: #dd1515;
+}
+
+.singleI .biText ul li:after {
+	position: absolute;
+	right: -12px;
+	top: 0;
+	content: "|";
+}
+
+.singleI .biText ul li:last-child {
+	margin-right: 0;
+}
+
+.singleI .biText ul li:last-child:after {
+	display: none;
+}
+
+.singleI .biText p {
+	font-size: 14px;
+	color: #636363;
+}
+

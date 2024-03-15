@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./styles/Nav.css";
 // import ModalC from "./Modal";
 
@@ -44,9 +44,9 @@ const Nav = () => {
               </NavLink>
             </li>
           ))}
-          <button className=" bg-[#ff1744] text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static">
+          <Link to={'/login'} className="bg-[#ff1744] text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static">
             Get Started
-          </button>
+          </Link>
         </ul>
         {/* button */}
       </div>
