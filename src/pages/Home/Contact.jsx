@@ -13,8 +13,8 @@ import AlertM from "../../components/main/Alert";
 const Contact = () => {
   const formR = useRef();
   const [open, setOpen] = useState(false);
-  const [alertOpen,setAlertOpen]=useState(false)
-  const [alert,setAlert]=useState({severity:'',message:''})
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alert, setAlert] = useState({ severity: "", message: "" });
   const handelSubmit = (e) => {
     e.preventDefault();
     setOpen(true);
@@ -30,20 +30,28 @@ const Contact = () => {
       .then(
         () => {
           console.log("SUCCESS!");
-          setAlert({severity:'success',message:'message submitted with success'})
+          setAlert({
+            severity: "success",
+            message: "message submitted with success",
+          });
+          setTimeout(() => {
+            setOpen(false);
+            setAlertOpen(true);
+          }, 500);
         },
         (error) => {
           console.log("FAILED...", error.text);
-          setAlert({severity:'danger',message:error.text})
+          setAlert({ severity: "error", message: error.text });
+          setTimeout(() => {
+            setOpen(false);
+            setAlertOpen(true);
+          }, 500);
         }
       );
-      e.target.reset()
+    e.target.reset();
+
     setTimeout(() => {
-      setOpen(false);
-      setAlertOpen(true)
-    }, 500);
-    setTimeout(() => {
-      setAlertOpen(false)
+      setAlertOpen(false);
     }, 10000);
   };
   return (
@@ -64,7 +72,9 @@ const Contact = () => {
           <h1 className="mb-5 text-4xl text-semibold text-[#ff1747] text-center shadow-sm p-3">
             Contact Form
           </h1>
-         {alertOpen&&<AlertM severity={alert.severity} message={alert.message} />}
+          {alertOpen && (
+            <AlertM severity={alert.severity} message={alert.message} />
+          )}
           <form onSubmit={handelSubmit} ref={formR}>
             <Backdrop
               sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
