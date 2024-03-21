@@ -1,7 +1,7 @@
-import Card from "../../components/main/Card";
-import Home from "../../components/main/Home";
-import Section from "../../components/main/Section";
-import WelecomParg from "../../components/main/WelecomParg";
+import Card from "../../components/home/main/Card";
+import Home from "../../components/home/main/Home";
+import Section from "../../components/home/main/Section";
+import WelecomParg from "../../components/home/main/WelecomParg";
 
 const Main = () => {
   return (

@@ -1,10 +1,10 @@
-import video from "../../assets/video.mp4";
+import video from "../../../assets/video.mp4";
 import homStyles from "./styles/Home.module.css";
 import { Typewriter } from "react-simple-typewriter";
 
 const Home = () => {
   return (
-    <div className={homStyles.main}>
+    <div className={`${homStyles.main} relative`}>
       <video
         className={homStyles.video}
         src={video}
@@ -14,7 +14,7 @@ const Home = () => {
       ></video>
       <div className={homStyles.content}>
         <h1>
-          <span className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-t from-[#ff1744] to-neutral-400  text-center font-sans font-bold">
+          <span className="relative z-10 text-5xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-t from-[#ff1744] to-neutral-400  text-center font-sans font-bold">
             <Typewriter
               words={[
                 "Reserve a Stadium",

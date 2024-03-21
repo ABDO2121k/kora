@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../../components/main/Footer";
-import Nav from "../../components/main/Nav";
+import Footer from "../../components/home/main/Footer";
+import Nav from "../../components/home/main/Nav";
+import Chatbot from "../../components/home/chat/Chat";
 
 const Home = () => {
   return (
-    <div>
+    <div className="relative">
       <div>
         <Nav />
       </div>
@@ -13,7 +14,8 @@ const Home = () => {
       </div>
       <div className="mt-10">
         <Footer />
-      </div>
+      </div>{" "}
+      <Chatbot />
     </div>
   );
 };

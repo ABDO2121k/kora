@@ -13,10 +13,10 @@ const BlogRecent = ({ blog }) => {
       <div className="cursor-pointer shadow-md mt-10 ml-2 p-3">
         <Link to={`/news/${blog?.id}`}>
           <Grid container>
-            <Grid element sm={4}>
+            <Grid item sm={4}>
               <div className={``}>
                 <div>
-                  <img src={blog?.images[0]} alt="blog img" />
+                  <img src={blog?.images?.length>0&&blog?.images[0]} alt="blog img" style={{height:'100px',width:'100px'}} />
                 </div>
               </div>
             </Grid>

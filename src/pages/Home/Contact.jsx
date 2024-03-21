@@ -8,7 +8,7 @@ import {
 import section from "../../assets/contact.jpg";
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
-import AlertM from "../../components/main/Alert";
+import AlertM from "../../components/home/main/Alert";
 
 const Contact = () => {
   const formR = useRef();

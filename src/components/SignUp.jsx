@@ -16,7 +16,7 @@ import Stack from "@mui/joy/Stack";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import GoogleIcon from "./main/GoogleIcon";
+import GoogleIcon from "./home/main/GoogleIcon";
 import login1 from "../assets/login3.jpg";
 import login2 from "../assets/login4.jpg";
 import { Link } from "react-router-dom";
@@ -161,7 +161,9 @@ export default function SignUp() {
                   const data = {
                     email: formElements.email.value,
                     password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
+                    firstName: formElements.firstName.value,
+                    lastName: formElements.lastName.value,
+                    
                   };
                   alert(JSON.stringify(data, null, 2));
                 }}

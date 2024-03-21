@@ -11,11 +11,13 @@ const BlogCard = ({ blog }) => {
     <div>
       <div className="cursor-pointer shadow-md mt-10 ml-5 p-3">
         <Link to={`/news/${blog?.id}`}>
-        <div className={` flex ${cardStyles.singleI} flex-col sm:flex-row`}>
-            <div className={cardStyles.biPic}>
+          <div className={` flex ${cardStyles.singleI} flex-col sm:flex-row`}>
+            <div
+              className={`${cardStyles.biPic} flex items-center justify-center`}
+            >
               <img
                 className={cardStyles.img}
-                src={blog?.images[0]}
+                src={blog?.images?.length > 0 && blog?.images[0]}
                 alt="blog img"
               />
             </div>
@@ -32,7 +34,12 @@ const BlogCard = ({ blog }) => {
               <div className="p-4 border border-gray-200 w-[90%] rounded-md shadow-md">
                 <p className="text-lg font-semibold">
                   {blog?.text ? blog?.text.slice(0, 150) : ""}
-                  {blog?.text.length > 50 && <span className="text-sm text-[#ff1744] opacity-70">  continue ...</span>}
+                  {blog?.text.length > 50 && (
+                    <span className="text-sm text-[#ff1744] opacity-70">
+                      {" "}
+                      continue ...
+                    </span>
+                  )}
                 </p>
               </div>
             </div>

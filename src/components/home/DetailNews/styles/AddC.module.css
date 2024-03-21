@@ -1,0 +1,24 @@
+.btnCAdd {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    background: #ff1744;
+    border: #ff1744 1px solid;
+    color: #ffffff;
+    padding: 4px 26px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  .btnCAdd:hover {
+    color: #ff1744;
+    border-color: #e5e5e5;
+    background-color: white;
+  }

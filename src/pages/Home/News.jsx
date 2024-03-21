@@ -1,88 +1,67 @@
-import { Grid } from "@mui/material";
-import BlogCard from "../../components/news/BlogCard";
-import FirstBlog from "../../components/news/FirstBlog";
-import HeadeN from "../../components/news/HeadeN";
-import BlogRecent from "../../components/news/BlogRecent";
-import newsStyles from "../../components/news/styles/News.module.css";
+import { Backdrop, CircularProgress, Grid } from "@mui/material";
+import BlogCard from "../../components/home/news/BlogCard";
+import FirstBlog from "../../components/home/news/FirstBlog";
+import HeadeN from "../../components/home/news/HeadeN";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import { useContext, useState } from "react";
+import { myContext } from "../../context/GlobalContext";
+import RecentNSection from "../../components/home/news/RecentNSection";
 
 const News = () => {
-  const blogPostTable = [
-    {
-      id: 1,
-      date: "Fri Mar 15 2024 16:17:59 GMT+0000 ",
-      title: "afin a Nadir",
-      text: "        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem nisi cumque non facere ullam sed tempore eveniet accusamus porro explicabo quae possimus, nam, qui esse et earum! Cum quas distinctio similique minus nam. Deleniti harum recusandae cupiditate, omnis natus expedita quia minima deserunt architecto. Incidunt voluptatum facere possimus natus suscipit molestias quam dicta commodi corporis error veritatis hic exercitationem labore sint, quibusdam autem sapiente ullam cupiditate sit? Ullam quisquam sequi delectus veritatis, magni debitis perspiciatis sunt fugit tenetur impedit quidem, in quia eveniet cupiditate iste placeat? Ducimus aspernatur harum alias dolorum exercitationem velit dolor consectetur, excepturi praesentium? Neque, deserunt fugit!",
-      images: [
-        "https://img.freepik.com/photos-gratuite/photographie-arene-football-sport_1409-4807.jpg?t=st=1710514430~exp=1710518030~hmac=0c52851186530ccd5e4d7f5ce200fd2fd51a93538355b7177d500d266504e9f3&w=900",
-        "https://img.freepik.com/photos-gratuite/photographie-arene-football-abandonnee_1409-4722.jpg?t=st=1710517554~exp=1710521154~hmac=5f8d55cc4b2ba7826d8e51875298f3007ac18ac614299617cf38ceb51aac5c99&w=900",
-      ],
-      comments: [
-        {
-          id: 1,
-          text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi labore illum hic laudantium nam impedit fugit sapiente facere? Laboriosam optio quibusdam atque. Perspiciatis ipsum eaque dolorem voluptatum et repudiandae nobis?",
-          replies: [
-            { id: 1, text: "Reply 1 to Comment 1" },
-            { id: 2, text: "Reply 2 to Comment 1" },
-          ],
-        },
-        {
-          id: 2,
-          text: "Comment 2",
-          replies: [
-            { id: 1, text: "Reply 1 to Comment 1" },
-            { id: 2, text: "Reply 2 to Comment 1" },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      date: "Fri Mar 15 2024 16:17:59 GMT+0000 ",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem nisi cumque non facere ullam sed tempore eveniet accusamus porro explicabo quae possimus, nam, qui esse et earum! Cum quas distinctio similique minus nam. Deleniti harum recusandae cupiditate, omnis natus expedita quia minima deserunt architecto. Incidunt voluptatum facere possimus natus suscipit molestias quam dicta commodi corporis error veritatis hic exercitationem labore sint, quibusdam autem sapiente ullam cupiditate sit? Ullam quisquam sequi delectus veritatis, magni debitis perspiciatis sunt fugit tenetur impedit quidem, in quia eveniet cupiditate iste placeat? Ducimus aspernatur harum alias dolorum exercitationem velit dolor consectetur, excepturi praesentium? Neque, deserunt fugit!",
-      title: "afin a Nadir2",
-      images: [
-        "https://img.freepik.com/photos-gratuite/photographie-arene-football-sport_1409-4807.jpg?t=st=1710514430~exp=1710518030~hmac=0c52851186530ccd5e4d7f5ce200fd2fd51a93538355b7177d500d266504e9f3&w=900",
-        "https://img.freepik.com/photos-gratuite/photographie-arene-football-abandonnee_1409-4722.jpg?t=st=1710517554~exp=1710521154~hmac=5f8d55cc4b2ba7826d8e51875298f3007ac18ac614299617cf38ceb51aac5c99&w=900",
-      ],
-      comments: [
-        {
-          id: 3,
-          text: "Comment 3",
-          replies: [
-            { id: 1, text: "Reply 1 to Comment 1" },
-            { id: 2, text: "Reply 2 to Comment 1" },
-          ],
-        },
-      ],
-    },
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const context = useContext(myContext);
+
+  const handlePageChange = (event, page) => {
+    setLoading(true);
+    setTimeout(() => {
+      setCurrentPage(page);
+      setLoading(false);
+    }, 1500);
+  };
+  const totalPages = Math.ceil(context?.blogPostTable?.length / 5);
   return (
     <div>
       <div>
         <HeadeN />
       </div>
       <Grid container>
-        <Grid item sm={8} xs={12}>
+        <Grid item  md={8} sm={12}>
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
+          >
+            <CircularProgress style={{ color: "#ff1744" }} />
+          </Backdrop>
           <div>
-            <FirstBlog blog={blogPostTable[0]} />
+            <FirstBlog
+              blog={
+                context?.blogPostTable?.length > 0 && context?.blogPostTable[0]
+              }
+            />
           </div>{" "}
           <div className="mt-5">
-            {blogPostTable.map((e, i) => (
-              <BlogCard key={i} blog={e} />
-            ))}
+            {context?.blogPostTable?.length > 0 &&context?.blogPostTable
+              ?.slice(currentPage * 5 - 5, currentPage * 5)
+              .map((e, i) => (
+                <BlogCard key={i} blog={e} />
+              ))}
+            <div className="mt-5 h-full flex items-center justify-center">
+              <Stack spacing={2} className="ml-10">
+                <Pagination
+                  count={totalPages}
+                  variant="outlined"
+                  style={{ borderColor: "#ff1744" }}
+                  onChange={handlePageChange}
+                />
+              </Stack>
+            </div>
           </div>
         </Grid>
-        <Grid item sm={4} xs={12}>
-          <div className="p-5">
-            <div className={newsStyles.sectionT}>
-              <h5>Recent Post</h5>
-            </div>
-            <div className="mt-5">
-              {blogPostTable.slice(0,5).map((e, i) => (
-                <BlogRecent key={i} blog={e} />
-              ))}
-            </div>
-          </div>
+        <Grid item md={4} sm={12}>
+          {/* hna  */}
+          <RecentNSection number={7} />
         </Grid>
       </Grid>
     </div>

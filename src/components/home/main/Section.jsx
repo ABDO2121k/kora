@@ -1,4 +1,4 @@
-import section from "../../assets/section.jpg";
+import section from "../../../assets/section.jpg";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import sectionStyles from "./styles/section.module.css";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ const Section = () => {
         <div className="pb-5 ">
           <div className={`${sectionStyles.bgaa} mt-10 ml-5 rounded-md`}>
             <img
-              className={`rounded-md absolute ml-10 object-cover h-100 w-[90%] ${sectionStyles.img}`}
+              className={`rounded-md absolute ml-10 object-cover h-full w-[80%] ${sectionStyles.img}`}
               src={section}
             />
           </div>

@@ -22,7 +22,7 @@ const Footer = () => {
         ></path>
       </svg>
       <footer className={styles.footer}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-white">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 text-white">
           <div className={styles.footerL}>
             <h3 className={styles.footerH}>Office Contact</h3>
             <ul>

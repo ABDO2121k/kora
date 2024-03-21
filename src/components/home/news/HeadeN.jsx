@@ -1,4 +1,4 @@
-import img from "../../assets/2.jpg";
+import img from "../../../assets/2.jpg";
 import headerStyles from './styles/Header.module.css'
 
 const HeadeN = () => {
