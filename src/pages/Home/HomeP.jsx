@@ -3,6 +3,7 @@ import Footer from "../../components/home/main/Footer";
 import Nav from "../../components/home/main/Nav";
 import Chatbot from "../../components/home/chat/Chat";
 
+
 const Home = () => {
   return (
     <div className="relative">
@@ -15,7 +16,7 @@ const Home = () => {
       <div className="mt-10">
         <Footer />
       </div>{" "}
-      <Chatbot />
+      {/* <Chatbot /> */}
     </div>
   );
 };

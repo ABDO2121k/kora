@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import {senMessage} from './chat.js'
+import { senMessage } from './chat.js'
+import axios from "axios"
+
+axios.defaults.withCredentials = true;
 
 
 
@@ -8,6 +11,8 @@ export const myContext = createContext(null);
 
 const ContextProvider = ({ children }) => {
   const [blogPostTable, setBlogPostTable] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLo, setLogged] = useState(false);
 
   // begin
   useEffect(() => {
@@ -1456,11 +1461,60 @@ const ContextProvider = ({ children }) => {
   }, []);
   //end
 
+
+  //auth
+  const login = async (inputs) => {
+    try {
+      const res = await axios.post("http://localhost:8000/api/user/login", inputs);
+      setCurrentUser(res.data);
+      setLogged(true);
+    } catch (err) {
+      console.error(err.response.data.message);
+      throw new Error(err.response.data.message);
+    }
+  };
+
+  const signup = async (inputs) => {
+    try {
+      const res = await axios.post("http://localhost:8000/api/user/signup", inputs);
+      return res
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
+  };
+
+  const logout = async () => {
+    await axios.post("http://localhost:8000/api/user/logout");
+    setCurrentUser(null);
+    setLogged(false);
+  };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.post("http://localhost:8000/api/user/verify");
+        if (res.data) {
+          setCurrentUser(res.data);
+          setLogged(true);
+        }
+        return true;
+      } catch (err) {
+        return err;
+      }
+    };
+    checkAuth();
+  }, []);
+
+  //end auth
+
   return (
     <myContext.Provider
       value={{
         blogPostTable,
-        senMessage
+        senMessage,
+        currentUser,
+        isLo,login,
+        signup,logout
       }}
     >
       {children}

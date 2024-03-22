@@ -1,4 +1,3 @@
-import * as React from "react";
 import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -19,14 +18,22 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import GoogleIcon from "./home/main/GoogleIcon";
 import login1 from "../assets/login3.jpg";
 import login2 from "../assets/login4.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { myContext } from "../context/GlobalContext";
+import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
+import { Alert } from "@mui/material";
+import SuccessAlert from "./alerts/SuccessAlert";
+import ErrorAlert from "./alerts/ErrorAlert";
+
 
 function ColorSchemeToggle(props) {
   const { onClick, ...other } = props;
   const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), []);
+
 
   return (
     <IconButton
@@ -46,6 +53,43 @@ function ColorSchemeToggle(props) {
 }
 
 export default function Login() {
+  const context = useContext(myContext)
+  const [alert, setAlert] = useState({ type: "", text: "" });
+  const navigate=useNavigate()
+  // login
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const formElements = event.currentTarget.elements;
+      const data = {
+        email: formElements.email.value,
+        password: formElements.password.value,
+        remember: formElements.persistent.checked,
+      };
+      event.target.reset()
+      await context?.login(data)
+      setAlert({
+        type: "success",
+        text: "Login with success",
+      });
+    } catch (err) {
+      console.log(err)
+      setAlert({
+        type: "error",
+        text: err.message,
+      });
+    }
+    return setTimeout(() => {
+      if(alert.type=="success"){
+          navigate('/')
+      }
+      setAlert({ type: "", text: "" })
+    }, 10000);
+  }
+  useEffect(()=>{
+    if(context?.isLo) navigate('/')
+  },[context?.isLo])
+  //end login
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -135,6 +179,9 @@ export default function Login() {
                   </Link2>
                 </Typography>
               </Stack>
+              <Box>
+                {alert?.type=="success"?<SuccessAlert message={alert?.text}/>:alert?.type=="error"&&<ErrorAlert message={alert?.text}/>}
+              </Box>
               <Button
                 variant="soft"
                 color="neutral"
@@ -155,16 +202,7 @@ export default function Login() {
             </Divider>
             <Stack gap={4} sx={{ mt: 2 }}>
               <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  const formElements = event.currentTarget.elements;
-                  const data = {
-                    email: formElements.email.value,
-                    password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
-                  };
-                  alert(JSON.stringify(data, null, 2));
-                }}
+                onSubmit={handleSubmit}
               >
                 <FormControl required>
                   <FormLabel>Email</FormLabel>

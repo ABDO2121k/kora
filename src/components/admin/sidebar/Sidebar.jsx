@@ -70,7 +70,6 @@ const Sidebar2 = () => {
         <div className="border-t flex p-3">
           <p
             className="text-white p-3 w-10 h-10 bg-black  rounded-md"
-          // style={{ fontSize: "1.2rem" }}
           >
             {context?.currentUser ? `${context?.currentUser?.firstName[0].toUpperCase()}${context?.currentUser?.lastName[0].toUpperCase()}` : "AK"}
           </p>
