@@ -21,10 +21,9 @@ import login2 from "../assets/login4.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { myContext } from "../context/GlobalContext";
-import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
-import { Alert } from "@mui/material";
 import SuccessAlert from "./alerts/SuccessAlert";
 import ErrorAlert from "./alerts/ErrorAlert";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 
 function ColorSchemeToggle(props) {
@@ -55,11 +54,13 @@ function ColorSchemeToggle(props) {
 export default function Login() {
   const context = useContext(myContext)
   const [alert, setAlert] = useState({ type: "", text: "" });
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  const [loading,setLoading]=useState(false)
   // login
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      setLoading(true)
       const formElements = event.currentTarget.elements;
       const data = {
         email: formElements.email.value,
@@ -79,16 +80,14 @@ export default function Login() {
         text: err.message,
       });
     }
+    setLoading
     return setTimeout(() => {
-      if(alert.type=="success"){
-          navigate('/')
-      }
       setAlert({ type: "", text: "" })
     }, 10000);
   }
-  useEffect(()=>{
-    if(context?.isLo) navigate('/')
-  },[context?.isLo])
+  useEffect(() => {
+    if (context?.isLo) navigate(-1)
+  }, [context?.isLo])
   //end login
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -180,7 +179,7 @@ export default function Login() {
                 </Typography>
               </Stack>
               <Box>
-                {alert?.type=="success"?<SuccessAlert message={alert?.text}/>:alert?.type=="error"&&<ErrorAlert message={alert?.text}/>}
+                {alert?.type == "success" ? <SuccessAlert message={alert?.text} /> : alert?.type == "error" && <ErrorAlert message={alert?.text} />}
               </Box>
               <Button
                 variant="soft"

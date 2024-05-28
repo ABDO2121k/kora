@@ -9,10 +9,10 @@ const HeadeN = () => {
         style={{ backgroundImage: `url(${img})`,objectFit:'cover' }}
       >
         <div className="container">
-          <div className="grid">
+          <div className="w-[100%]">
             <div>
               <div>
-                <h2 className={headerStyles.h2}>News</h2>
+                <h2 className={`${headerStyles.h2} break-words w-full`}>News</h2>
               </div>
             </div>
           </div>

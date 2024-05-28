@@ -5,9 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    daisyui: {
-      themes: ["light", "dark", "cupcake"],
-    },
+    // daisyui: {
+    //   themes: ["light", "dark", "cupcake"],
+    // },
   },
   plugins: [require("daisyui")],
 }

@@ -4,13 +4,14 @@ import FirstBlog from "../../components/home/news/FirstBlog";
 import HeadeN from "../../components/home/news/HeadeN";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { myContext } from "../../context/GlobalContext";
 import RecentNSection from "../../components/home/news/RecentNSection";
 
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [newsTable, setNewsTable] = useState()
   const context = useContext(myContext);
 
   const handlePageChange = (event, page) => {
@@ -20,14 +21,30 @@ const News = () => {
       setLoading(false);
     }, 1500);
   };
-  const totalPages = Math.ceil(context?.blogPostTable?.length / 5);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await context?.getNews()
+        setNewsTable(data)
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchData()
+  }, [])
+  const totalPages = Math.ceil(newsTable?.length / 5);
   return (
     <div>
       <div>
         <HeadeN />
       </div>
       <Grid container>
-        <Grid item  md={8} sm={12}>
+        <Grid item md={8} sm={12}>
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={loading}
@@ -37,12 +54,12 @@ const News = () => {
           <div>
             <FirstBlog
               blog={
-                context?.blogPostTable?.length > 0 && context?.blogPostTable[0]
+                newsTable?.length > 0 && newsTable[0]
               }
             />
           </div>{" "}
           <div className="mt-5">
-            {context?.blogPostTable?.length > 0 &&context?.blogPostTable
+            {newsTable?.length > 0 && newsTable
               ?.slice(currentPage * 5 - 5, currentPage * 5)
               .map((e, i) => (
                 <BlogCard key={i} blog={e} />
@@ -61,7 +78,7 @@ const News = () => {
         </Grid>
         <Grid item md={4} sm={12}>
           {/* hna  */}
-          <RecentNSection number={7} />
+          <RecentNSection number={7}  />
         </Grid>
       </Grid>
     </div>

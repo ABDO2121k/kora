@@ -1,11 +1,8 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import ButtonStyles from "../styles/AddC.module.css";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-
-import { Grid, TextField } from "@mui/material";
+import { useContext, useState } from "react";
+import { Backdrop, CircularProgress, Grid, TextField } from "@mui/material";
 import { myContext } from "../../../../context/GlobalContext";
 
 const style = {
@@ -18,40 +15,46 @@ const style = {
   boxShadow: 24,
   p: 4,
   width: {
-    xs: "450px",
+    xs: "100%",
     sm: "600px",
     md: "800px",
     lg: "900px",
   },
   height: {
-    xs: "95%",
+    xs: "60%",
     sm: "75%",
     lg: "70%",
   },
 };
 
-export default function AddCommentModal() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () =>{
-    setOpen(true);
-    setCounter(counter+1)
-  } 
-  const handleClose = () => setOpen(false);
-  const { id } = useParams();
-  const [selectedNews, setSelectedNews] = useState();
+export default function AddCommentModal({ open, counter, handleClose, setCounter, selectedNews }) {
+
   const context = useContext(myContext);
-  const [counter,setCounter]=useState()
-  useEffect(() => {
-    const news1 =
-      context?.blogPostTable?.length > 0 &&
-      context?.blogPostTable?.find((e) => e.id == id);
-    setSelectedNews(news1);
-  }, [id,counter]);
+  const [loading, setLoading] = useState(false);
+  const handleAddComment = async (e) => {
+    try {
+      setLoading(true)
+      e.preventDefault()
+      const formData = new FormData(e.target)
+      const inputV = formData.get('comment')
+      e.target.reset()
+      const data = { user: context?.currentUser?._id, text: inputV }
+      await context?.addComment(selectedNews?._id, data)
+      setCounter(counter + 1)
+    } catch (err) {
+      console.log(err)
+    }
+    return setLoading(false)
+  }
+
   return (
     <div>
-      <button className={`${ButtonStyles.btnCAdd}`} onClick={handleOpen}>
-        Add Comment
-      </button>
+         <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 10000000000000 }}
+        open={loading}
+      >
+        <CircularProgress style={{ color: "#ff1744" }} />
+      </Backdrop>
       <Modal
         open={open}
         onClose={handleClose}
@@ -88,7 +91,7 @@ export default function AddCommentModal() {
                 <h2 className="text-xl text-center text-gray-400 uppercase">
                   {selectedNews?.title}
                 </h2>
-                <div className="mt-5 p-3">
+                <form className="mt-5 p-3" onSubmit={handleAddComment}>
                   <TextField
                     multiline
                     rows={4}
@@ -110,7 +113,7 @@ export default function AddCommentModal() {
                   >
                     Add Comment
                   </Button>
-                </div>
+                </form>
               </div>
             </Grid>
           </Grid>

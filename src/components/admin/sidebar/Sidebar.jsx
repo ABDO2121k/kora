@@ -13,19 +13,33 @@ const Sidebar2 = () => {
   const context = useContext(myContext)
   const [state, setState] = useState([
     {
+      icon: "dashboard",
+      link: "",
+      text: "Dashboard",
+      alert: "Dashboard",
+    },{
       icon: "planing",
+      link: "planing",
       text: "Plannings",
       alert: "Plannings",
     },
     {
       icon: "stadium",
+      link: "stadium",
       text: "Stadiums",
       alert: "Stadiums",
     },
     {
       icon: "news",
+      link: "news",
       text: "News",
       alert: "News",
+    },
+    {
+      icon: "settings",
+      link: "settings",
+      text: "Settings",
+      alert: "Settings",
     },
   ]);
 
@@ -38,7 +52,7 @@ const Sidebar2 = () => {
               <IconButton variant="soft" color="primary" size="sm">
                 <SportsSoccerIcon sx={{ color: "#ff1744" }} />
               </IconButton>
-              <Typography level="title-lg">FtbHub</Typography>
+              <Typography level="title-lg" className='text-lg text-bold'>FtbHub</Typography>
             </Box>
           </Link>}
           <button
@@ -50,11 +64,8 @@ const Sidebar2 = () => {
         </div>
 
         <ul className="flex-[0.78] px-3 ">
-          {/* <li>
-                <TeamSwitcher expanded={expanded} />
-              </li> */}
           {state.map((e, i) => (
-            <NavLink exact to={`/admin/${e.icon}`} key={i}>
+            <NavLink exact to={`/admin/${e.link}`} key={i}>
               <SidebarItem
                 icon={e.icon}
                 alertV={e.alertV}
@@ -81,10 +92,10 @@ const Sidebar2 = () => {
           >
             <div className="leading-4">
               <h4 className="font-semibold">
-                {context?.currentUser?.firstName || "ABDELKADER"} {context?.currentUser?.lastName || "KOUAH"}
+                {context?.currentUser?.firstName} {context?.currentUser?.lastName}
               </h4>
               <span className="text-xs text-gray-600">
-                {context?.currentUser?.email || "abdokouah2@gmail.com"}
+                {context?.currentUser?.email}
               </span>
             </div>
             <MoreVertIcon size={20} />

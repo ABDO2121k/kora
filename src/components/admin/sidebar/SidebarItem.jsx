@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import StadiumIcon from '@mui/icons-material/Stadium';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function SidebarItem({ icon, text, active, alertV, expanded }) {
     const [img, setImg] = useState();
@@ -10,6 +12,16 @@ export default function SidebarItem({ icon, text, active, alertV, expanded }) {
             case "news":
                 setImg(
                     <NewspaperIcon size={expanded && expanded && 20} />
+                );
+                break;
+                case "settings":
+                setImg(
+                    <SettingsIcon size={expanded && expanded && 20} />
+                );
+                break;
+            case "dashboard":
+                setImg(
+                    <DashboardIcon size={expanded && expanded && 20} />
                 );
                 break;
             case "stadium":

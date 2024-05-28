@@ -24,6 +24,7 @@ import { myContext } from "../context/GlobalContext";
 import { useContext, useEffect, useState } from "react";
 import SuccessAlert from "./alerts/SuccessAlert";
 import ErrorAlert from "./alerts/ErrorAlert";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 function ColorSchemeToggle(props) {
   const { onClick, ...other } = props;
@@ -52,11 +53,13 @@ function ColorSchemeToggle(props) {
 export default function SignUp() {
   const context = useContext(myContext)
   const [alert, setAlert] = useState({ type: "", text: "" });
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  const [loading,setLoading]=useState(false)
   // login
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      setLoading(true)
       const formElements = event.currentTarget.elements;
       const data = {
         email: formElements.email.value,
@@ -77,14 +80,15 @@ export default function SignUp() {
         text: err.message,
       });
     }
+    setLoading(false)
     return setTimeout(() => {
-          navigate('/login')
+      navigate('/login')
       setAlert({ type: "", text: "" })
     }, 10000);
   }
-  useEffect(()=>{
-    if(context?.isLo) navigate('/')
-  },[context?.isLo])
+  useEffect(() => {
+    if (context?.isLo) navigate('/')
+  }, [context?.isLo])
   //end login
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -176,7 +180,7 @@ export default function SignUp() {
                 </Typography>
               </Stack>
               <Box>
-                {alert?.type=="success"?<SuccessAlert message={alert?.text}/>:alert?.type=="error"&&<ErrorAlert message={alert?.text}/>}
+                {alert?.type == "success" ? <SuccessAlert message={alert?.text} /> : alert?.type == "error" && <ErrorAlert message={alert?.text} />}
               </Box>
               <Button
                 variant="soft"

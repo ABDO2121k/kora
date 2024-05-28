@@ -7,10 +7,16 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsDetails from "./pages/Home/NewsDetails";
 import Admin from "./pages/admin/AdminP";
-import Planing from "./pages/admin/Planing";
+import Planing from "./pages/admin/planing/Planing";
 import DashBord from "./pages/admin/DashBord";
-import NewsA from "./pages/admin/News";
-import Stadium from "./pages/admin/Stadium";
+import Stadium from "./pages/admin/stadium/Stadium";
+import NewsA from "./pages/admin/news/News";
+import AddNews from "./pages/admin/news/AddNews";
+import Settings from "./pages/admin/settings/Settings";
+import AddStadium from "./pages/admin/stadium/AddStadium";
+import StadiumPlaning from "./pages/admin/planing/StadiumPlaning";
+import AddPlaning from "./pages/admin/planing/AddPlaning";
+
 
 const App = () => {
   return (
@@ -27,11 +33,19 @@ const App = () => {
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<DashBord />} />
-          <Route  element={<DashBord />} />
+          <Route element={<DashBord />} />
           <Route path="/admin/planing" element={<Planing />} />
           <Route path="/admin/news" element={<NewsA />} />
+          <Route path="/admin/news/add" element={<AddNews />} />
+          <Route path="/admin/news/update/:id" element={<AddNews />} />
+          <Route path="/admin/settings" element={<Settings />} />
           <Route path="/admin/stadium" element={<Stadium />} />
+          <Route path="/admin/stadium/add" element={<AddStadium />} />
+          <Route path="/admin/stadium/update/:id" element={<AddStadium />} />
+          <Route path="/admin/stadium/planing/:idS" element={<StadiumPlaning />} />
+          <Route path="/admin/stadium/planing/add/:idP" element={<AddPlaning />} />
         </Route>
+        <Route path="/test" element={<Planing />} />
       </Routes>
     </div>
   );
