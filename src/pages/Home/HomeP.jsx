@@ -16,7 +16,7 @@ const Home = () => {
       <div className="mt-10">
         <Footer />
       </div>{" "}
-      {/* <Chatbot /> */}
+      <Chatbot />
     </div>
   );
 };
