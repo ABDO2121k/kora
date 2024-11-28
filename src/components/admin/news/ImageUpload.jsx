@@ -42,7 +42,7 @@ const ImageUpload = ({ setState, initial, submited }) => {
      
         
     if(img !== null){ 
-        const imgRef = ref(imageDb, files/${v4()})
+        const imgRef = ref(imageDb, `files/${v4()}`)
         uploadBytes(imgRef,img).then((value)=>{
             console.log(value)
             //END*************
