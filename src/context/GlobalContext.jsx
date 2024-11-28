@@ -8,7 +8,8 @@ import { paidR, addReservation, deleteReservation } from "./reservation.js";
 import axios from "axios"
 
 axios.defaults.withCredentials = true;
-
+const url = import.meta.env.VITE_API_URL
+axios.defaults.baseURL=url;
 
 
 
@@ -21,7 +22,7 @@ const ContextProvider = ({ children }) => {
   //auth
   const login = async (inputs) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/user/login", inputs);
+      const res = await axios.post("/api/user/login", inputs);
       setCurrentUser(res.data);
       console.log(currentUser)
       setLogged(true);
@@ -33,7 +34,7 @@ const ContextProvider = ({ children }) => {
 
   const signup = async (inputs) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/user/signup", inputs);
+      const res = await axios.post("/api/user/signup", inputs);
       return res
     } catch (err) {
       throw new Error(err.response.data.message);
@@ -41,7 +42,7 @@ const ContextProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await axios.post("http://localhost:8000/api/user/logout");
+    await axios.post("/api/user/logout");
     setCurrentUser(null);
     setLogged(false);
   };
@@ -49,7 +50,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.post("http://localhost:8000/api/user/verify");
+        const res = await axios.post("/api/user/verify");
         if (res.data) {
           setCurrentUser(res.data);
           setLogged(true);

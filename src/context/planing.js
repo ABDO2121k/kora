@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const GetStadiumPlannings = async (planingId) => {
     try {
-        const res = await axios.post(`http://localhost:8000/api/planing/getStadiumPlannings/${planingId}`);
+        const res = await axios.post(`/api/planing/getStadiumPlannings/${planingId}`);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -15,7 +15,7 @@ export const GetStadiumPlannings = async (planingId) => {
 
 export const GetCurrentPlaning = async (planingId) => {
     try {
-        const res = await axios.post(`http://localhost:8000/api/planing/getPlaning/${planingId}`);
+        const res = await axios.post(`/api/planing/getPlaning/${planingId}`);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -26,7 +26,7 @@ export const GetCurrentPlaning = async (planingId) => {
 
 export const addPlaning = async (data) => {
     try {
-        const res = await axios.post("http://localhost:8000/api/planing/addPlaning", data);
+        const res = await axios.post("/api/planing/addPlaning", data);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -36,7 +36,7 @@ export const addPlaning = async (data) => {
 
 export const deletePlaning = async (id) => {
     try {
-        const res = await axios.delete(`http://localhost:8000/api/planing/deletePlaning/${id}`);
+        const res = await axios.delete(`/api/planing/deletePlaning/${id}`);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -46,7 +46,7 @@ export const deletePlaning = async (id) => {
 
 export const updatePlaning = async (planingId, data) => {
     try {
-        const res = await axios.put("http://localhost:8000/api/planing/updatePlaning", { planingId, data });
+        const res = await axios.put("/api/planing/updatePlaning", { planingId, data });
         return res.data
     } catch (err) {
         console.error(err.response.data.message);

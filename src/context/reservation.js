@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const paidR = async (reservationId) => {
     try {
-        const res = await axios.put(`http://localhost:8000/api/reservation/paidR/${reservationId}`);
+        const res = await axios.put(`/api/reservation/paidR/${reservationId}`);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -17,7 +17,7 @@ export const paidR = async (reservationId) => {
 
 export const addReservation = async (reserId, data) => {
     try {
-        const res = await axios.post(`http://localhost:8000/api/reservation`, {data,planingId:reserId});
+        const res = await axios.post(`/api/reservation`, {data,planingId:reserId});
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
@@ -27,7 +27,7 @@ export const addReservation = async (reserId, data) => {
 
 export const deleteReservation = async (idP, idR) => {
     try {
-        const res = await axios.delete(`http://localhost:8000/api/reservation/deleteReservation/${idP}/${idR}`);
+        const res = await axios.delete(`/api/reservation/deleteReservation/${idP}/${idR}`);
         return res.data
     } catch (err) {
         console.error(err.response.data.message);
