@@ -20,21 +20,43 @@ const ImageUpload = ({ setState, initial, submited }) => {
 
 
 
-  const handleImageChange = async (index) => {
-    if (!inputRef.current.files[0]) return false;
-    setImages([...images, "empty one hhhhh ana nadi wlh"]);
-    setIsLoading({ is: true, index: index });
-    const file = inputRef.current.files[0];
-    const ref2 = ref(storage, `images/${file.name}${new Date()}`);
-    await uploadBytes(ref2, file);
+  // const handleImageChange = async (index) => {
+  //   if (!inputRef.current.files[0]) return false;
+  //   setImages([...images, "empty one hhhhh ana nadi wlh"]);
+  //   setIsLoading({ is: true, index: index });
+  //   const file = inputRef.current.files[0];
+  //   const ref2 = ref(storage, `images/${file.name}${new Date()}`);
+  //   await uploadBytes(ref2, file);
 
-    const url = await getDownloadURL(ref2);
-    inputRef.current.value = "";
-    // let imageCopy=[...images]
-    // images[index]=url
-    setImages([...images, url]);
-    return setIsLoading(false);
-  };
+  //   const url = await getDownloadURL(ref2);
+  //   inputRef.current.value = "";
+  //   // let imageCopy=[...images]
+  //   // images[index]=url
+  //   setImages([...images, url]);
+  //   return setIsLoading(false);
+  // };
+
+
+  function ClickHandler(){
+        
+     
+        
+    if(img !== null){ 
+        const imgRef = ref(imageDb, files/${v4()})
+        uploadBytes(imgRef,img).then((value)=>{
+            console.log(value)
+            //END*************
+            getDownloadURL(value.ref).then(url=>{ 
+                //console.log(url)                               
+                setCurCl((data)=>{return{...data, photo : url}})//.then((x)=>{setDb((data)=>{return[...data, x]})})
+                setTimeout(function(){setDb((data)=>{return[...data, curCl]})}, 10000);
+
+            })
+            
+        })
+
+        
+        }}
 
   const handleSort = () => {
     let newOrder = [...images];

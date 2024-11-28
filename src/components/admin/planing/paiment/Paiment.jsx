@@ -36,7 +36,7 @@ const Checkout = ({ selectedEvent, handleS, amount }) => {
         return actions.order.capture().then((details) => {
             handlePaid();
             const name = details.payer.name.given_name;
-            toast(`Transaction completed by ${name}`);
+            toast.success(`Transaction completed by ${name}`);
         });
     };
 
